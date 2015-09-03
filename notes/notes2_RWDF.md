@@ -14,12 +14,39 @@ Throughout this course, you'll work through a project creating a home town websi
 
 ##Extra readings
 
-Google's web fundamentals: 
+- **Want to test with different browsers in the cloud? Try BrowserStack**: https://www.browserstack.com/
+
+- **Chrome Canary--the developer version of Chrome**: https://www.google.com/intl/en/chrome/browser/canary.html
+
+- **Remote Debugging on Android with Chrome**:
+https://developer.chrome.com/devtools/docs/remote-debugging
+
+- **iOS WebKit Debug Proxy**:
+https://github.com/google/ios-webkit-debug-proxy
+
+- **Using the viewport meta tag to control layout on mobile browsers**: https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag
+
+- **list of CSS properties**:
+http://www.w3.org/community/webed/wiki/CSS/Properties
+
+- **CSS media queries**:
+https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries
+
+- **Font Awesome**:
+http://fortawesome.github.io/Font-Awesome/examples/
+
+- **Google's web fundamentals**: 
 https://developers.google.com/web/fundamentals/?hl=zh-cn
 
+- **Responsive Data Table Roundup**:
+https://css-tricks.com/responsive-data-table-roundup/
+
+- **Truncate String with Ellipsis**:
 https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/
 
+- **ADDING MULTIPLE LINE ELLIPSIS EFFECT WITH CSS**
 http://joelsaupe.com/programming/multiple-line-ellipsis-css/
+
 
 
 ##Project
