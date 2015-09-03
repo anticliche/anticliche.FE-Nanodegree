@@ -14,28 +14,88 @@ Quick load times and responsive content leads to higher conversions. There's muc
 
 ##Extra readings
 
-HTTP2 for front-end web developers:
+- **Early version of Amazon**:
+https://blog.bufferapp.com/wp-content/uploads/2014/02/amazon.jpg
 
-https://mattwilcox.net/web-development/http2-for-front-end-web-developers
+- **Early version of The Facebook**:
+https://upload.wikimedia.org/wikipedia/en/f/f8/Thefacebook.png
 
-CSS Image Sprites:
+- **Google Art Project: The Tower of Babel**:
+https://www.google.com/culturalinstitute/u/0/asset-viewer/the-tower-of-babel/bAGKOdJfvfAhYQ?hl=en&projectId=art-project
 
+- **HTTP Archive--Average bytes to open a web page**:
+http://httparchive.org/interesting.php#bytesperpage
+
+- **Google's overview of Chrome DevTools**:
+https://developer.chrome.com/devtools
+
+- **Figure tag**: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure
+
+- **Getting started with Grunt**: http://gruntjs.com/getting-started
+
+- **Grunt for People Who Think Things Like Grunt are Weird and Hard**: https://24ways.org/2013/grunt-is-not-weird-and-hard/
+
+- **Generate multi-resolution images with Grunt**: http://addyosmani.com/blog/generate-multi-resolution-images-for-srcset-with-grunt/
+
+- **Grunt plugin for generating multiple images**: 
+https://github.com/andismith/grunt-responsive-images
+
+- **CSS Image Sprites**:
 https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/CSS_Image_Sprites
 
-How to Use Responsive Background Image Sprites – CSS Tutorial:
-
+- **How to Use Responsive Background Image Sprites – CSS Tutorial**:
 http://blog.brianjohnsondesign.com/responsive-background-image-sprites-css-tutorial/
 
-Unicode character sets:
+- **HTTP2 for front-end web developers**:
+"In a nutshell, HTTP/2 will mean that requesting multiple files will be less costly: prepare to stop using spriting, concatenating and other HTTP/1 hacks!"
+https://mattwilcox.net/web-development/http2-for-front-end-web-developers
 
+- **How CSS affects load time**:
+http://www.smashingmagazine.com/2013/04/build-fast-loading-mobile-website/
+
+- **Unicode character sets**:
 http://unicode-table.com/en/sets/
 
-List of Unicode characters:
-
+- **List of Unicode characters**:
 https://en.wikipedia.org/wiki/List_of_Unicode_characters
 
-Responsive Images Community Group:
+- **More on meta tag charsets**:
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 
+- **Zocial**:
+http://zocial.smcllns.com/
+
+- **Font Awesome**:
+http://fortawesome.github.io/Font-Awesome/
+
+- **We Love Icon Fonts!**:
+http://weloveiconfonts.com/
+
+- **Icon fonts on CSS-Tricks**:
+https://css-tricks.com/examples/IconFont/
+
+- **Responsive Hero Images**:
+http://blog.cloudfour.com/responsive-hero-images/
+
+- **Srcset and sizes**:
+http://ericportis.com/posts/2014/srcset-sizes/
+
+- **Device pixel density list**:
+http://pixensity.com/
+
+- **High DPI Images for Variable Pixel Densities**:
+http://www.html5rocks.com/en/mobile/high-dpi/
+
+- **Working with h units**:
+https://github.com/ResponsiveImagesCG/picture-element/issues/86
+
+- **Built-in Browser Support for Responsive Images**:
+http://www.html5rocks.com/en/tutorials/responsive/picture-element/
+
+- **Picturefill--A RESPONSIVE IMAGE POLYFILL**:
+http://scottjehl.github.io/picturefill/
+
+- **Responsive Images Community Group**:
 http://responsiveimages.org/
 
 
@@ -500,10 +560,76 @@ accomplished pretty easily with the picture element.
        <img src="kookaburra_small.jpg"
          alt="The kookaburra">
      </picture>
+ 
+ 
          
+-------------------
 
 
+#Summary
 
+- img
+
+        img {
+   
+        max-width: 100%;
+   
+        }
+
+- article
+
+        article {
+   
+        width: 50em;
+   
+        }
+
+- use automation tools to reduce the size of the page bytes: grunt
+
+- `<meta charset="utf-8">`
+- unicode: `&#9786`
+- icon:
+  
+        <style type="text/css">
+   
+         @import url(http://weloveiconfonts.com/api/?family=zocial);
+
+          [class*="zocial-"]:before {
+         
+           display: inline-block;
+         
+           font-family: 'zocial', sans-serif;
+         
+           text-shadow: 3px 3px 3px #aaa;
+         
+           width: 20vw;
+     
+          }
+          
+        <footer>
+    
+         <li class="zocial-twitter"></li> 
+         <li class="zocial-digg"></li> 
+         <li class="zocial-facebook"></li> 
+         <li class="zocial-googleplus"></li>
+        
+        </footer>
+          
+- sources, srcset, sizes, picture:
+        
+        <picture>
+          
+          <source media="(min-width:750px)" srcset="images/horses-1600_large_2x.
+          
+          jpg 2x, images/horses-800_large_1x.jpg" />
+          
+          <source media="(min-width: 500px)" srcset="images/horses_medium.jpg" />
+          
+          <img src="images/horses_small.jpg" alt="Horses in Hawaii">
+          
+        </picture> 
+          
+   
 
 
 
