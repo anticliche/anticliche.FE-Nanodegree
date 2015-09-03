@@ -13,22 +13,33 @@ Front-end Web Developers must have **a fundamental understanding of HTML and CSS
 
 After completing this course you will be able to **build a responsive portfolio site**, with your own CSS framework, with the functionality to add your future projects to it. Most importantly, you will have **an understanding of the DOM and how HTML, CSS, and JavaScript all relate to each other**.
 
-## Course Resourses
+## Extra Readings
 
-[CSS reference]("https://developer.mozilla.org/en-US/docs/Web/CSS/Reference")
+- **CSS reference**: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
 
-[A Complete Guide to Flexbox]("https://css-tricks.com/snippets/css/a-guide-to-flexbox/")
+- **A Complete Guide to Flexbox**: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
-[HTML Validation Service]("https://validator.w3.org/#validate_by_input")
+- **HTML Validation Service**: https://validator.w3.org/#validate_by_input
 
-[CSS Validation Service]("https://jigsaw.w3.org/css-validator/#validate_by_input")
+- **CSS Validation Service**: https://jigsaw.w3.org/css-validator/#validate_by_input
 
-[HTML 5.1 Document]("http://www.w3.org/TR/html51/")
+- **HTML 5.1 Document**: http://www.w3.org/TR/html51/
 
-[fonts]("http://www.google.com/fonts")
+- **fonts**: http://www.google.com/fonts
 
-[Chrome developer tools keyboard shortcuts]("https://developer.chrome.com/devtools/docs/shortcuts#opening-devtools")
+- **Chrome developer tools keyboard shortcuts**: https://developer.chrome.com/devtools/docs/shortcuts#opening-devtools
 
+- **bootstrap**: http://getbootstrap.com/
+
+- **foundation**: http://foundation.zurb.com/
+
+- **yaml**: http://www.yaml.de/
+
+- **960 grid**: http://960.gs/
+
+- **suzy**: http://susy.oddbird.net/
+
+- **frameless**: http://framelessgrid.com/
 
 
 -----------------------------------
