@@ -58,6 +58,11 @@ http://jsonlint.com/
 
 - **True lies and falsy values in Python and Javascript**: http://opensourcehacker.com/2012/10/17/true-lies-and-falsy-values-in-python-and-javascript/
 
+- **Functions are first class objects in javascript**:
+http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/
+ 
+- **A Short History of JavaScript**:
+https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript 
 
 
 ---------------
@@ -100,7 +105,7 @@ The main point here is that `.super-header-wrapper` is an element on the page th
 
 -----------------
 
-#Lesson 2: Data Types
+#Lesson 1: Data Types
 
 Dig deeper into JavaScript as we introduce you to the building blocks of the language as you write more complex code using variables and advanced data structures like JSON, Objects, and Arrays.
 
@@ -430,7 +435,7 @@ example:
 
 ---------------------
 
-#Lesson 3: Flow Control
+#Lesson 2: Flow Control
 
 Finish the résumé while you learn how to make your code more modular and reusable by using conditional statements, loops, and functions.
 
@@ -542,26 +547,94 @@ example:
        console.log(countries[country]);
     };
 
+The `:last` jQuery selector returns the final element in a list that matches whatever precedes it.
+
+So for `work-entry:last`, if there are 3 `work-entry` elements, it will only return the 3rd one.
+
+If you're interested, you can read more about jQuery's `:last` selector here(http://www.w3schools.com/jquery/sel_last.asp).
 
 
+##Functions
+
+    var myFunc = function(param1, param2) {
+       //code goes here
+    }
+    
+     function myFunc(param1, param2) {
+        //code goes here
+     }
+     
+##Click metrics
+
+invoke the function to display in the page
+
+     myFunc();
+
+##Collecting click locations     
+
+    $(document).click(function(loc) {
+      var x = loc.pageX;
+      var y = loc.pageY;
+      
+      locClicks(x,y);
+    });
+
+##Return statements
+   
+    function locationizer(work_obj) {
+    var locationArray = [];
+    
+    for (job in work_obj.jobs) {
+        var newLocation = work_obj.jobs[job].location;
+        locationArray.push(newLocation);
+    }
+    
+    return locationArray;
+    
+    }
+   
+    console.log(locationizer(work));
 
 
+##Internationalize names
 
 
+##Encapsulation
+
+functions are objects
+
+pretty much everything in JS is an object!
+
+**Functions are first class objects in javascript**:
+http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/
+
+encapsulate: hold inside
+
+objects can encapsulate functions as well.
+
+    projects.display = function() {
+       // display code goes here
+    }
+    
+encapsulation: holding the display function inside the projects object.
+
+a nice way to organise our code into logical domains and JS makes it really easy to do so.
 
 
+##Exploring new syntax
 
+three different ways of defining objects:
 
+    var bio = {
+        "name": "comeron pittman"
+    }
+    
+    bio.name = "cameron pittman";
+    
+    bio["name"] = "cameron pittman";
 
-
-
-
-
-
-
-
-
-
+**A Short History of JavaScript**:
+https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript
 
 
 
