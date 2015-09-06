@@ -64,6 +64,10 @@ http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/
 - **A Short History of JavaScript**:
 https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript 
 
+- **Data-Driven Documents**: http://d3js.org/
+
+- **Google Maps Javascript API**: https://developers.google.com/maps/documentation/javascript/tutorial
+
 
 ---------------
 
@@ -637,17 +641,30 @@ three different ways of defining objects:
 https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript
 
 
+##Customize the Portfolio
+
+Important! There are two more steps required to make the map work properly.
+
+1. Uncomment the last block of code in helper.js. The code you need starts with `window.addEventListener('load', initializeMap)`; and goes until the end of the file.
+
+2. Uncomment the `<script>` tag for Google Maps API in the `<head>` of index.html.
+
+The reason these instructions weren't included in the video is that we didn't realize until late that these lines produce errors if you don't `.append()` a map to the page. Our bad.
+
+Lastly, see how there's `#mapDiv` in the video? You might see it as `#map-div` in the actual project.
+
+add interactive charts:
+
+**Data-Driven Documents**: http://d3js.org/
+
+add interactive maps:
+
+**Google Maps Javascript API**: https://developers.google.com/maps/documentation/javascript/tutorial
 
 
+##The final project
 
-
-
-
-
-
-
-
-
+make the page your own.
 
 
 

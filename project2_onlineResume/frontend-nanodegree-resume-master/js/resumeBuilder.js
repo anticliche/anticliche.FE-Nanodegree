@@ -13,16 +13,6 @@ This is empty on purpose! Your code to build the resume will go here.
  //console.log(funThoughts);
 
 
- var formattedName = HTMLheaderName.replace("%data%", "Jason Yu");
-
-
- var formattedRole = HTMLheaderRole.replace("%data%", "Front End Developer");
-
- $("#header").prepend(formattedRole);
- $("#header").prepend(formattedName);
-
-
-
 var bio = {
    "name": "Jason Yu", 
    "role": "Front End Developer", 
@@ -31,14 +21,28 @@ var bio = {
    "email": "yujie_jason@yeah.net",   
    "github": "anticliche",
    },
-   "welcomeMessage": "lorem ipsum dolor sit amet etc etc etc.",
+   "welcomeMessage": "Let's code, and rock!",
    "skills": [
-     "HTML", "CSS", "JS", "Microsoft Office"
+     "HTML", "CSS", "JavaScript", "English"
    ], 
    "bioPic": "images/suit.jpg"
  }
 
-if(bio.skills.length > 0) {
+ var formattedName = HTMLheaderName.replace("%data%", "Jason Yu");
+
+ var formattedRole = HTMLheaderRole.replace("%data%", "Front End Developer");
+
+ $("#header").prepend(formattedRole);
+ $("#header").prepend(formattedName);
+
+
+ var formattedImage = HTMLbioPic.replace("%data%", "images/suit.jpg");
+ var formattedMessage = HTMLwelcomeMsg.replace("%data%", "Let's code, and rock!");
+
+ $("#header").append(formattedImage + formattedMessage); 
+
+ 
+ if(bio.skills.length > 0) {
     
       $("#header").append(HTMLskillsStart);
       
@@ -53,17 +57,27 @@ if(bio.skills.length > 0) {
       formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
       $("#skills").append(formattedSkill);
       
-}
+ }
+  
+ var formattedMobile = HTMLmobile.replace("%data%", "18607918021");
+ var formattedEmail = HTMLemail.replace("%data%", "yujie_jason@yeah.net");
+ var formattedGithub = HTMLgithub.replace("%data%", "anticliche");
+
+ $("#topContacts").append(formattedMobile,formattedEmail,formattedGithub);
+
+ $("#footerContacts").append(formattedMobile,formattedEmail,formattedGithub);
+
+
 
 
  var work = {
       "jobs":[
         {
           "employer": "Bank of China",
-          "title": "graduation employee",
+          "title": "Graduation Employee: Teller",
           "location": "Nanchang, China",
           "dates": "2015.07-2015.08",
-          "description": "Served customers as a teller, such as open up an account and transfer money.Maintained the order of the bank reception and queue management.",
+          "description": "1. Served customers as a teller, such as open up an account and transfer money 2. Maintained the order of the bank reception and queue management",
         },
         {
           "employer": "China Unicom",
@@ -111,46 +125,126 @@ $(document).click(function(loc) {
 
 
 
+
  var projects = {
-      "projects": [
+      "project": [
         {
-          "title": "my portfolio website",
+          "title": "My Portfolio Website",
           "dates": "2015.09",
-          "description": "developed a responsive website that display images, descriptions and links to each of the portfolio projects.",
-          "images": "images/portfolio.png"
+          "description": "Developed a responsive website that display images, descriptions and links to each of the portfolio projects",
+          "images": ["images/portfolio.png"]
         },
         {
           "title": "International Capital Markets Investment Simulation Exchange Competition",
           "dates": "2013.10-2013.12",
-          "description": "1. Worked with 4 classmates from different countries to make investment.  2.Completed a 20-pages report successfully to get a top 10 reward among 60 groups.",
+          "description": "1. Worked with 4 classmates from different countries to make investment  2.Completed a 20-pages report successfully to get a top 10 reward among 60 groups",
           "images": [
-            "images/report1.png", "images/report2.png", "images/report3,png"
+            "images/1.png", "images/2.png", "images/3.png"
           ]
         }
       ]
  };
   
  projects.display = function() {
-  for (project in projects.projects) {
+  for (item in projects.project) {
     $("#projects").append(HTMLprojectStart);
 
-    var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+    var formattedTitle = HTMLprojectTitle.replace("%data%", projects.project[item].title);
     $(".project-entry:last").append(formattedTitle);
 
-    var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+    var formattedDates = HTMLprojectDates.replace("%data%", projects.project[item].dates);
     $(".project-entry:last").append(formattedDates);
 
-    var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+    var formattedDescription = HTMLprojectDescription.replace("%data%", projects.project[item].description);
     $(".project-entry:last").append(formattedDescription);
 
-    if (projects.projects[project].images.length > 0) {
-      for (image in projects.projects[project].images) {
-        var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-        $(".project-entry:last").append(fortmattedImage);
-      }
+    if (projects.project[item].images.length > 0) {
+      for (image in projects.project[item].images) {
+        var formattedImage = HTMLprojectImage.replace("%data%", projects.project[item].images[image]);
+        $(".project-entry:last").append(formattedImage);
+      };
     }
   }
  };
+
+projects.display();
+
+
+
+
+
+var education = {
+      "schools": [
+        {
+          "name": "Beijing Forestry University",
+          "location": "Beijing, China",
+          "degree": "Bachelor",
+          "major": "Finance",
+          "dates": "2009/09-2013/06"
+        },
+        {
+          "name": "University of Glasgow",
+          "location": "Glasgow, UK",
+          "degree": "Master",
+          "major": "International Corporate Finance and Banking",
+          "dates": "2013/09-2014/12"
+        }
+      ],
+      "onlineCourses": [
+        {
+          "title": "Intro to Computer Science",
+          "school": "Udacity",
+          "dates": "2015/08",
+          "url": "www.udacity.com/course/intro-to-computer-science--cs101"
+        },
+        {
+          "title": "Front-End Web Developer Nanodegree",
+          "school": "Udacity",
+          "dates": "2015/08-2015/10",
+          "url": "www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+        }
+      ]
+};
+
+education.display = function() {
+        
+        for(school in education.schools) {
+        
+          $("#education").append(HTMLschoolStart);
+
+          var formattedName = HTMLschoolName.replace("%data%",education.schools[school].name);
+
+          var formattedLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
+  
+          var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);       
+
+          var formattedMajor = HTMLschoolMajor.replace("%data%",education.schools[school].major);
+         
+          var formattedDates = HTMLschoolDates.replace("%data%",education.schools[school].dates);
+          
+          $(".education-entry:last").append(formattedName,formattedLocation,formattedDegree,formattedMajor,formattedDates);
+
+        }
+    
+ $(".education-entry:last").append(HTMLonlineClasses);
+
+
+        for(onlineCourse in education.onlineCourses) {  
+
+
+
+          var formattedonlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[onlineCourse].title);
+          var formattedonlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[onlineCourse].school);
+          var formattedonlineDates = HTMLonlineDates.replace("%data%",education.onlineCourses[onlineCourse].dates);
+          var formattedonlineURL = HTMLonlineURL.replace("%data%",education.onlineCourses[onlineCourse].url);
+          $(".education-entry:last").append(formattedonlineTitle,formattedonlineSchool,formattedonlineDates,formattedonlineURL);
+        }
+};
+
+education.display();
+
+
+
 
 
 
@@ -163,7 +257,7 @@ function inName(name) {
     name[0].slice(1).toLowerCase();
 
   return name[0] +" "+name[1];  
-}
+};
 
 $("#main").append(internationalizeButton);
 
