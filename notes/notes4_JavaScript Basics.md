@@ -68,6 +68,11 @@ https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript
 
 - **Google Maps Javascript API**: https://developers.google.com/maps/documentation/javascript/tutorial
 
+- **JavaScript Scoping and Hoisting**: http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html
+
+
+
+
 
 ---------------
 
@@ -665,6 +670,161 @@ add interactive maps:
 ##The final project
 
 make the page your own.
+add whatever you want to show how truely awesome you are.
+There are lots of js libraries.
+
+
+#Problem set 2
+
+##Function-Level Scope
+
+**Example 1**
+
+    var outsideExample = "First string";
+    function example() {
+    var outsideExample = "Second string";
+    }
+    example();
+    console.log(outsideExample); // "First string"
+
+**Example 2**
+
+    var outsideExample = "First string";
+    function example() {
+    outsideExample = "Second string";
+    }
+    example();
+    console.log(outsideExample); // "Second string"
+
+
+In the first example, notice that we're using `var` within example(). `var` means we're declaring a new `outsideExample` variable within `example()`. There are two `outsideExamples` in our program, one with a global scope (`"First string"`) and one with a function-level scope inside `example()`.
+
+After we run `example()` and try to log `outsideExample`, we'll log the global version of `outsideExample`, which is `"First string"` because `console.log()` doesn't have access to the version of `outsideExample` that was created within example().
+
+A global scope means that the variable is accessible anywhere inside our program, which is why we don't need to use `var` in example 2. In example 2, there's only one version of `outsideExample` because we aren't declaring a new variable inside `example()`. Instead we're simply modifying the value of the original global variable `outsideExample`, which is why we log `"Second string"` at the end of example 2.
+
+To learn more, check out this in-depth article :http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html on JavaScript scope.
+
+
+##Block-Level Scope
+
+    var outsideExample = "First string";
+    if (true) {
+    var outsideExample = "Second string";
+    console.log(outsideExample);
+    }
+    console.log(outsideExample);
+
+The first `console.log()` obviously logs `"Second string"` as it comes right after we set the value of `outsideExample` to `"Second string"`. But what about the second `console.log()`?
+
+Remember, if statements do **not** create their own scope. Unlike the last quiz, where we created a totally new variable inside a function, the if statement does not create a new variable. It simply overwrites the value of `outsideExample` to `"Second string"`.
+
+So, the second time we `console.log()`, we see `"Second string"` again.
+
+
+##Function Declaration Syntax
+	
+As you've learned in this course, there are two syntaxes to declare functions
+
+`var functionName = function() {}`
+
+and
+
+`function functionName() {}`
+
+The JavaScript interpreter, which is responsible for taking the code you write and preparing it to become machine code, will handle the two function declarations slightly differently because of the way it handles variable declarations.
+
+All variable declarations will immediately get moved to the top of their scope. For example:
+
+    var x = 5;
+    console.log(x); // 5
+    var y = 10;
+
+is the same as
+
+    var x, y; // this line simply declares x and y at the same time.
+    x = 5;
+    console.log(x); // 5
+    y = 10;
+
+Notice how the declaration of `y` moved to the top of the scope. And also notice how the first line doesn't set a value for neither `x` nor `y`. After `var x, y;` both `x` and `y` are `undefined`.
+
+The same behavior holds true for other types of variables, including functions. If you use the `var functionName syntax`, only the function's declaration (e.g. `var functionName;`) gets moved at the top of its scope. However, if you use `function functionName()` syntax, the function declaration and definition (the actual instructions inside the function) get moved to the top of the function's scope.
+
+**Example 1**
+
+    example1();
+    function example1() {
+         console.log("Ran the example");
+    }
+
+You should see `"Ran the example!"` when you run this code.
+
+**Example 2**
+
+    example2();
+    var example2 = function() {
+        console.log("Ran the example");
+    }
+
+You should see an `undefined` error when this code gets run.
+
+In both examples, the interpreter modifies the code. This is effectively how this code is interpreted.
+
+**Example 1 Interpreted**
+
+    var example1;
+    example1 = function() {
+        console.log("Ran the example");
+    }
+    example1();
+
+**Example 2 Interpreted**
+
+    var example2;
+    example2();
+    example2 = function() {
+        console.log("Ran the example");
+    }
+
+In both examples, the declarations get moved to the top of the scope. But notice how the definition comes along too in the first example, which allows us to use `example1()` right away.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
