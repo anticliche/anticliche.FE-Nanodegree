@@ -352,7 +352,7 @@ The next part, `names[0].slice(1).toLowerCase()` acts similarly, except this tim
 
 ##3.Objects
 
-**objects 类似 python 中的 library**
+**objects 类似 python 中的 dictionary**
 
 arrays are special kind of objects in JS.
 
