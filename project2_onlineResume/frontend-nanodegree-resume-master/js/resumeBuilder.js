@@ -20,8 +20,9 @@ var bio = {
    "mobile": "18607918021",
    "email": "yujie_jason@yeah.net",   
    "github": "anticliche",
+   "location": "Nanchang"
    },
-   "welcomeMessage": "Let's code, and rock!",
+   "welcomeMessage": "Let's code and rock!",
    "skills": [
      "HTML", "CSS", "JavaScript", "English"
    ], 
@@ -37,7 +38,7 @@ var bio = {
 
 
  var formattedImage = HTMLbioPic.replace("%data%", "images/suit.jpg");
- var formattedMessage = HTMLwelcomeMsg.replace("%data%", "Let's code, and rock!");
+ var formattedMessage = HTMLwelcomeMsg.replace("%data%", "Let's code and rock!");
 
  $("#header").append(formattedImage + formattedMessage); 
 
@@ -61,11 +62,13 @@ var bio = {
   
  var formattedMobile = HTMLmobile.replace("%data%", "18607918021");
  var formattedEmail = HTMLemail.replace("%data%", "yujie_jason@yeah.net");
- var formattedGithub = HTMLgithub.replace("%data%", "anticliche");
+ var formattedGithub= HTMLgithub.replace("%data%", "anticliche");
+  var formattedLocation = HTMLlocation.replace("%data%", "Nanchang");
 
- $("#topContacts").append(formattedMobile,formattedEmail,formattedGithub);
 
- $("#footerContacts").append(formattedMobile,formattedEmail,formattedGithub);
+ $("#topContacts").append(formattedMobile,formattedEmail,formattedGithub,formattedLocation);
+
+ $("#footerContacts").append(formattedMobile,formattedEmail,formattedGithub,formattedLocation);
 
 
 
