@@ -35,7 +35,7 @@ Enemy.prototype.render = function() {
 Enemy.prototype.bugReset = function () {
     for (var i = 0; i < allEnemies.length; i++)
         allEnemies[i].x = -200;
-}
+};
 
 
 
@@ -47,7 +47,7 @@ var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
-}
+};
 
 Player.prototype.update = function(dt) {
 
@@ -60,7 +60,7 @@ Player.prototype.update = function(dt) {
       allEnemies[i].bugReset();
       this.reset();
     }
-}
+};
 
 // check for collisions
 
@@ -75,7 +75,7 @@ Player.prototype.collide = function () {
             this.reset();
         }    
     }
-}
+};
 
 var score = 0;
 
@@ -101,7 +101,7 @@ Player.prototype.resetOnWin = function() {
 // render()
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
 //handleInput()
@@ -138,7 +138,7 @@ Player.prototype.handleInput = function(key) {
       break;
         
     }
-}
+};
 
 
 
