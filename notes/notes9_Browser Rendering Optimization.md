@@ -51,7 +51,7 @@ The News Aggregator App - Turn an unusable app into a high performance, 60 frame
 
 ========================
 
-#Lesson 1 - The Critical Rendering Path
+#Lesson 1 - The Critical Rendering Path（基础: pipeline）
 
 - You'll play Jank Invaders to develop your eye for jank!
 - You'll learn how the browser turns HTML into pixels on the page
@@ -121,13 +121,12 @@ now with that out of the way, we can talk about the pipeline a bit more. the cha
 
 1. you make a visual change either with CSS or JS, browser must recalculate the styles of the elements that were affected. now if you change a layout property so that's one changing elements geometry, like width, height or position with relation to another elements, like left or top, the browsers will have to check all the other elements and reflow the page. Any affected areas will need to be repainted and the final painted elements only to be composited back together.
 
-2. The second way the pipeline gets used is when you change a paint only property, like background-image, text-color or shadows. 
-
-This time we make the change, the styles are calculated. **we don't do layout because we didn't change the geometry of any elements**. We do paint and we do composite.
+2. The second way the pipeline gets used is when you change a paint only property, like background-image, text-color or shadows. (This time we make the change, the styles are calculated. **we don't do layout because we didn't change the geometry of any elements**. We do paint and we do composite.)
 
 3. The last way involves changing sth that requires neither layout nor paint,  just compositing. Compositing is where the browser puts the individual layers of the page together and that requires layer management to ensure we have the right layers and in the correct order.
+So we make our change, we do style calculations but we only do composite. 
 
-So we make our change, we do style calculations but we only do composite. You probably noticed style was always included for each of those variations. different styles effect which parts of the pipeline we touch and therefore the performance characteristics of our apps.
+You probably noticed style was always included for each of those variations. different styles effect which parts of the pipeline we touch and therefore the performance characteristics of our apps.
 
 
 ##Rendering solution
@@ -140,6 +139,10 @@ If there was a resize handler that changes the style, or if a media query break 
 
 ##CSS Research 
 
+Not all CSS is created equal, some CSS properties have much reaching consequence than others. Your CSS should trigger the least amount of work possible and that's gonna mean avoiding 'paint' or 'layout' whenever possible. `transform` and `opacity` are far away the best properties to change because they can be handled just by 'composite' if the element has its own layout.
+
+ 
+
 ##Outro
 
 learned how the browser renders pixels from html, css and js.
@@ -148,7 +151,7 @@ learned how the browser renders pixels from html, css and js.
 ======================
 
 
-#Lesson 2 - App Lifecycles
+#Lesson 2 - App Lifecycles（基础：lifecycle）
 
 - You'll learn how there are four distinct phases in an app's lifecycle: Response, Animation, Idle and Load (RAIL).
 - You'll learn how your frame budget changes depending on where the user is in RAIL.
@@ -171,7 +174,7 @@ the four major areas of a web app's life cycle: RAIL.
 
 RAIL：Response, Animations, Idle, and Load.
 
-LIAR: Load, Idle, Animations, and Resonse. 
+LIAR: Load, Idle, Animations, and Response. 
 
 
 ## Load and Idle
@@ -186,13 +189,13 @@ a: image assets, videos, comments section
 
 In order for the app to even work, you've got to deliver the basic critical functionality, so this shouldn't be coming after the load, also news texts should be there as soon as the first pixels are being painted. Everything else though can come later. 
 
-user action could actually still happen during the post load idle state. in a moment you learn that you only have one hundred milliseconds to respond to those actions. this makes it all the more important to keep the post load test you're performing to **50 milliseconds** junks.
+user action could actually still happen during the post load idle state. in a moment you learn that you only have one hundred milliseconds to respond to those actions. this makes it all the more important to keep the post load test you're performing to **50 milliseconds** chunks.
 
 ##RAIL Response
 
 **100 milliseconds**, so a tenth of a second after someone presses sth on screen before they notice any lag. So if you could respond to all user input in that time, you're good to go. That's great if the thing they did was to say, toggle a check box or tap a button. and you show a single change, like a selected state. 
 
-But there's another version of this which is more challenging, which is that the user does sth that requires animation. **The most challenging performance issues always come out of the need to hit 60 frames a second**. Which is either interactions that stick to the user's finger or transitions and animations. For those we have a limit of **16 miliseconds**, which is one second or a thousand milliseconds divided by 60. In reality, we actually have less than 16 milliseconds, because the browser has overhead. so really we get around 10 to 12 milliseconds.
+But there's **another version** of this which is more challenging, which is that the user does sth that requires animation. **The most challenging performance issues always come out of the need to hit 60 frames a second**. Which is either interactions that stick to the user's finger or transitions and animations. For those we have a limit of **16 miliseconds**, which is one second or a thousand milliseconds divided by 60. In reality, we actually have less than 16 milliseconds, because the browser has overhead. so really we get around 10 to 12 milliseconds.
 
 
 **Response: 100ms**
@@ -231,6 +234,8 @@ q: what kind of interactions require 60fps animations?
 
 a: spinners, pinching, opening comments, scrolling, pull-to-refresh, drag-n-drop, side memu slide
 
+**Anything that involves movement or finger on screen interactions will need to run at 60 frames per second.**
+
 
 ## RAIL Thresholds Review
 
@@ -238,19 +243,29 @@ LIAR stands for load, idle, animations and responsiveness. During the load stage
 
 After loading, the app is idle, and this is a great time to do non-essential work to ensure that whatever interactions occur after this period will feel instantaneous. Your app's idle time should be broken down into 50 milliseconds chunks so that you can stop when the user starts interacting.
 
-During the animation stage, such as when users are scrolling or animations are occuring, you only have 16 milliseconds to render a frame. This is when 60 frames per second is absolutely critical.
+**During the animation stage, such as when users are scrolling or animations are occuring, you only have 16 milliseconds to render a frame. This is when 60 frames per second is absolutely critical.**
 
-Lastly, there's the reponse period. The human mind has about 100 milliseconds' grace period before an interaction with the site feels laggy and janky. That means your app needs to respond to user input in some way within a 100 milliseconds. Using this time wisely is absolutely critical for setting up difficult animations that run at 60 frames a second.
+Lastly, there's the reponse period. The human mind has about 100 milliseconds' grace period before an interaction with the site feels laggy and janky. That means your app needs to respond to user input in some way within a 100 milliseconds. **Using this time wisely is absolutely critical for setting up difficult animations that run at 60 frames a second.**
 
 
 ## Outro
+
+At this point, you know what you can afford to do and when you can do it, which it pretty handy.
+
+One thing to bear in mind is just because you can, say, paint or do layouts or even run JS, doesn't mean you have an unlimited budget. Layouts and style calculation times for example, both depend on the number of elements that are affected.
+
+One of the ways you can keep that time down is to reduce the number of elements on which they have to work.
+
+Now that you have a better idea of how to think about your app as a whole. It's time to drill into the specifics of resolving performance issues.
+
+
 
 
 
 ===========================
 
 
-#Lesson 3 - Weapons of Jank Destruction
+#Lesson 3 - Weapons of Jank Destruction（过渡：tools, find causes of junk）
 
 - You'll learn how to make sense of the Timeline panel in Chrome DevTools.
 - You'll practice profiling a few different apps to find the source of jank.
@@ -273,7 +288,7 @@ Lastly, there's the reponse period. The human mind has about 100 milliseconds' g
 ========================
 
 
-#Lesson 4 - JavaScript
+#Lesson 4 - JavaScript（详解1）
 
 - You'll optimize JavaScript to hit 60fps during animations.
 - You'll move expensive JavaScript operations off the main thread and into Web Workers.
@@ -307,8 +322,11 @@ Micro-optimizations come about when you try to write code that you think would b
 ## Optimizing JS for Animations Quiz
 
 Response  -100ms
+
 Animation -16ms
+
 Idle      -50ms
+
 Load      -1000ms
 
 
@@ -324,7 +342,11 @@ A: execute JS as early as possible every frame.
 
 ##requestAnimationFrame
 
-request animation frame should be your go-to-tools for creating animations. nobody likes to be interrupted in the middle of a task and the browser is no different. Remember how little time the browser has to render the frame at 60 frames a second, that is 16ms a frame. Realistically though there's some overhead to running a frame and the browser house housekeeping to do. so we should aim for about 10 ms instead. 
+**requestAnimationFrame is an API that will schedule your JS to run at the right point of every frame.**
+
+**request animation frame should be your go-to-tools for creating animations**. 
+
+nobody likes to be interrupted in the middle of a task and the browser is no different. Remember how little time the browser has to render the frame at 60 frames a second, that is 16ms a frame. Realistically though there's some overhead to running a frame and the browser house housekeeping to do. so we should aim for about 10 ms instead. 
 
 The JS part of your frame should typically be kept around 3 to 4 ms at most, because there's going to be other work like style calculations, layer management and compositing will come afterwards.
 
@@ -357,7 +379,7 @@ JavaScript profile tells us not just that I spent time in JS, but which function
 
 **需要另外学习，看文档，比较难以理解**
 
-web workers provide interface for spawning scripts to run in the background. normally websites run in a single thread running on the operating system. web workers allow you to run JS in a totally different scopes in the main window and on a totally separate operating system. Whatever work's happening in the main thread in the main window won't affect or be affected by the worker thread. and of course the opposite is true. whatever is happening in the worker thread won't affect or be affected by the main window. But the two can send messages back and forth. This means that you can isolate long-running JS inside a worker thread and allow the main thread to run free unimpeded. What's really cool though is that the web worker in the main thread can communicate with each other. Altogether web workers are incredibly valuable strategy for running long running code that does not create any jank on the main threat.   
+web workers provide interface for spawning scripts to run in the background. normally websites run in a single thread running on the operating system. web workers allow you to run JS in a totally different scopes in the main window and on a totally separate operating system. Whatever work's happening in the main thread in the main window won't affect or be affected by the worker thread. and of course the opposite is true. whatever is happening in the worker thread won't affect or be affected by the main window. But the two can send messages back and forth. This means that you can **isolate long-running JS inside a worker thread** and allow the main thread to run free unimpeded. What's really cool though is that the web worker in the main thread can communicate with each other. Altogether web workers are incredibly valuable strategy for running long running code that does not create any jank on the main threat.   
 
 Essentially you need to create a separate JS file.
 
@@ -376,7 +398,22 @@ If you find that you're missing frames because of garbage collection, then there
 
 ##A Snappier QR Code App Pt. 1 Quiz
 
+Refactor the QR Code App with `requestAnimationFrame`.
+
+Build and run: gulp serve.
+
+
 ##A Snappier QR Code App Pt. 2 Quiz
+
+Use this web worker: app/scripts/qrworker.js
+
+Create web worker in: QRCodeManager
+
+Send data to worker from: detectQRCode
+
+Remove unnecessary scripts from: index.html
+
+
 
 ##Outro
 
@@ -385,7 +422,7 @@ If you find that you're missing frames because of garbage collection, then there
 ===========================
 
 
-#Lesson 5 - Styles and Layout
+#Lesson 5 - Styles and Layout（详解2）
 
 - You'll learn how accessing the wrong CSS properties at inopportune moments can create loads of extra work for the browser.
 - You'll debug multiple instances of one of the nastiest performance problems - Forced Synchronous Layout.
@@ -481,7 +518,7 @@ be careful about what styles you change and when. In the app life cycle, LIAR, y
 
 ===================
 
-#Lesson 6 - Compositing and Painting
+#Lesson 6 - Compositing and Painting（详解3）
 
 - You'll practice profiling layer and paint performance with the paint profiler tool in the DevTools Timeline.
 - You'll manage and optimize layers to reduce the number of steps the browser needs to take to render each frame.
@@ -505,7 +542,7 @@ being able to control several parts of the image individually makes it much easi
 
 ## Composite Layers
 
-in dev tools, there's 2 records relating to layers or composite layers. the first one is **update layer tree** which happens when chrome's internal engine called blink figures out what layers are needed for the page. It looks at the styles of the elements and tries to figure out what order everything should be in and how many layers it needs. **Composite layers** is the other record, whether the browser is now putting the page together to send to the screen. The more layers you have the more time will be spent in layer management and compositing. **So there's a trade-off between reducing paint time and increasing lay management time**.
+in dev tools, there's 2 records relating to layers or composite layers. the first one is **update layer tree** which happens when chrome's internal engine called blink figures out what layers are needed for the page. It looks at the styles of the elements and tries to figure out what order everything should be in and how many layers it needs. **Composite layers** is the other record, where the browser is now putting the page together to send to the screen. The more layers you have the more time will be spent in layer management and compositing. **So there's a trade-off between reducing paint time and increasing layer management time**.
 
 
 ## Managing Layers 1,2
@@ -532,16 +569,31 @@ promoting elements to layers can be super awesome for avoiding paint problems, e
 if you change a visual property though, like say for instance, text color or shadows, promoting an element won't help in any way, because you'll still have to paint it. So make sure only using layer promotion when it makes sense.
 
 
+##Will-change quiz
+
 ##Your Compositing Budget
 
+layer management and compositing are not free. so this is a balancing act. there's no magic number of layers that you should aim for, but you are shooting for no more than two milliseconds in update layer tree and two milliseconds in compositing for 60 frames per second critical work, like animations. The key is knowing about the trade-offs and finding the right numbers for your own projects. 
+
+
 ##Layer Counting Quiz
+
+if you promote an element to a layer, you need to be careful because you could accidentally create a lot of other layers with it due to overlap. 
+
+The paint profile gives you awesome way to keep track of the layers that you're creating. the main thing is try to balance the compositing time and layer management with time that you spend in other part of the pipeline 
+
+Applying `will-change: transform;` to all other elements might seem appealing but it's gonna send your memory usage and compositing time through the roof. in the end you might cause more problems than you solve, which is especially a problem on mobile.
 
 
 ## Painting and Compositing Quiz
 
+
 ##Make Some Quizzes
 
 
+##The final project 
+
+##Course Outro
 
 
 
@@ -549,8 +601,55 @@ if you change a visual property though, like say for instance, text color or sha
 
 
 
+===============================
 
 
+
+#Summary
+-----------
+
+##Two basic concepts of web performance
+
+###1. Rendering path of a single frame or the pipe line
+
+**ParseHTML ---> Recalculate styles ---> layout ---> paint --->composite layers(layers)**
+
+or:
+
+**JavaScript(or CSS Anims, Web Animation API) ---> Style ---> layout ---> paint ---> composite**
+
+JS is yellow in TL
+
+Style and layout are purple in TL
+
+Paint and composite are green in TL
+
+
+
+###2. App's life cycle
+
+**LIAR:**
+
+load (1000 ms)
+
+idle (50 ms)
+
+**animations** (16 ms, or 60fps)
+
+response (100 ms)
+
+
+##Performance problems and solutions
+
+1. **Long running JavaScript**: 
+    - `requestAnimationFrame`
+    - web workers
+2. **Selector complexity and forced sychronous layout (FSL)**:
+    - BEM
+    - read layout properties then batch style changes
+3. **Layer management (trade-off between reducing paint time and increasing layer management time)**:
+    - will-change: transform;
+    - transform: translate Z(0);
 
 
 
