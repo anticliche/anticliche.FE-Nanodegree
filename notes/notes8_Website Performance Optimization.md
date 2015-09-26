@@ -263,13 +263,13 @@ to unblock css, sometimes to split the css into multiple files.
 
 Rendering on a smartphone, portrait orientation.
 
-1. <link href="style.css" rel="stylesheet">
+1. `<link href="style.css" rel="stylesheet">`
 
-2. <link href="style.css" rel="stylesheet" media="screen">
+2. `<link href="style.css" rel="stylesheet" media="screen">`
 
-3. <link href="portrait.css" rel="stylesheet" media="orientation:landscape">
+3. `<link href="portrait.css" rel="stylesheet" media="orientation:landscape">`
  
-4. <link href="print.css" rel="stylesheet" media="print">
+4. `<link href="print.css" rel="stylesheet" media="print">`
 
 Only 1 and 2 are render blocking.
 
