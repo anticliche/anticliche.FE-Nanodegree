@@ -7,6 +7,7 @@ since the selectors are not too complex and getElementbyId is less expensive;
 4) removed variables from for loop in the updatePositions function
 5) in the updatePositions function, replaced "querySlectorAll" with "getElementsByClassName",
 since the selectors are not too complex and getElementbyId is less expensive;
+6) in the changePizzaSizes function, replaced "querySlectorAll" with "getElementsByClassName";
 
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
@@ -447,7 +448,7 @@ var resizePizzas = function(size) {
       console.log("bug in sizeSwitcher");    
     }
 
-    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    var randomPizzas = document.getElementsByClassName(".randomPizzaContainer");
 
     for (var i = 0; i < randomPizzas.length; i++) {
         randomPizzas[i].style.width = newwidth + "%";
@@ -504,7 +505,7 @@ function updatePositions() {
   var items = document.getElementsByClassName('mover');
   var st = document.body.scrollTop / 1250;
   var phase;
-  /* Removed variables from loop */
+  /* Removed variables from loop */ 
   for (var i = 0; i < items.length; i++) {
     phase = Math.sin(st + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -529,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
 
-    var pizzaQuantity = (window.innerHeight / 75) + (window.innerWidth / 75);
+    var pizzaQuantity = window.innerHeight / 256 * 8;
     for (var i = 0; i < pizzaQuantity; i++) {
     var elem = document.createElement('img');
       elem.className = 'mover';

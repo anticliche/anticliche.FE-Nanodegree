@@ -1,12 +1,24 @@
 # Website Performance Optimization portfolio project
 
+##Steps to run the application
+
+1. open index.html in your browser;
+2. click links to discover the four projects in detail;
+3. in the Cam's Pizzeria, click buttons to make a choice about which kind of pizza do you like to order;
+4. in the manu section, you can drag the scrolling bar to change the size of pizza.
+
+
+
 ## My Optimizations:
 
 ### Optimizations for index.html to achieve a PageSpeed score above 90
-1. Compressed the size of pizzeria.jpg, cam_be_like.jpg and mobilewebdev.jpg;
-2. Made unneccesary JS function async and moved all the scripts to the bottom of the body;
-3. added media "print" to print.css;
-4. removed Google fonts link
+
+1. Compressed the size of pizzeria.jpg and changed it into png format; 
+2. Changed the format of cam_be_like and mobilewebdev images into png;
+3. Made unneccesary JS function async and moved all the scripts to the bottom of the body;
+4. inlined style.css;
+5. added media "print" to print.css;
+6. removed Google fonts link
 
 
 ### Optimizaitions for pizza.html to ensure a frame rate at 60fps when scrolling
@@ -17,11 +29,14 @@ since the selectors are not too complex and getElementbyId is less expensive;
 3. removed variables from for loop in the updatePositions function;
 4. in the updatePositions function, replaced "querySlectorAll" with "getElementsByClassName",
 since the selectors are not too complex and getElementbyId is less expensive
+5. in the changePizzaSizes function, replaced "querySlectorAll" with "getElementsByClassName";
+
 
  
 ### Resize pizzas under 5 ms in pizza.html
 
 deleted the determineDx function, since it's useless and increase the time to resize pizzas
+
 
 
 
